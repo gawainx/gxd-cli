@@ -4,6 +4,10 @@
 *.dll
 *.so
 *.dylib
+.idea/
+.DB_Store
+tmp/
+test-*
 
 # Test binary, build with `go test -c`
 *.test
