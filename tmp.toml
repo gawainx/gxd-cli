@@ -1,0 +1,22 @@
+title = "TOML test"
+
+# [network]
+# name = "iot" # create network named iot
+
+[service]
+ detach = false
+ name = "test"
+ image = "alpine"
+ work_dir = "/code"
+ net = "iot"
+ cmd = "./test-gin"
+ [[service.ports]]
+  host = 8974
+  target = 80
+ [[service.ports]]
+  host = 8996
+  target = 8080
+
+ [[service.volumes]]
+  host = "/Users/gawainx/go/src/gxd-cli/" # PWD for current dir
+  target = "/code"
