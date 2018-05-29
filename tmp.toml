@@ -1,8 +1,5 @@
 title = "TOML test"
 
-# [network]
-# name = "iot" # create network named iot
-
 [service]
  detach = false
  name = "test"
@@ -18,5 +15,5 @@ title = "TOML test"
   target = 8080
 
  [[service.volumes]]
-  host = "/Users/gawainx/go/src/gxd-cli/" # PWD for current dir
+  host = "/Users/gawainx/go/src/gxd-cli/"
   target = "/code"

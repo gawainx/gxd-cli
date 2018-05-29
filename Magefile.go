@@ -10,7 +10,7 @@ import (
     "github.com/magefile/mage/mg"
 )
 
-const VERSION = "v0.1"    //version
+const VERSION = "v0.2"    //version
 const prefix = "gxd-cli" // app name
 const path = "bin"	      // target path
 var Default = Build
@@ -35,7 +35,7 @@ func Linux() {
     }
     path := filepath.Join("bin",name)
     fmt.Println("Building app for linux...")
-    err := sh.RunWith(e,"go","build","-o",path,"main.go","cfg.go")
+    err := sh.RunWith(e,"go","build","-o",path,"main.go","cfg.go","toml_tmpl.go")
     if err!=nil{
         fmt.Println("Built failed.")
         fmt.Println(err)
@@ -53,7 +53,7 @@ func Darwin() {
     }
     path := filepath.Join("bin",name)
     fmt.Println("Building app for osx...")
-    err := sh.Run("go","build","-o",path,"main.go","cfg.go")
+    err := sh.Run("go","build","-o",path,"main.go","cfg.go","toml_tmpl.go")
     if err != nil{
         fmt.Println("Built failed.")
         fmt.Println(err)

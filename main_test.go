@@ -14,3 +14,7 @@ func TestRunContainer(t *testing.T) {
     tom.InitFromFile("tmp.toml")
     RunContainer(tom)
 }
+
+func TestWriteInitTOML(t *testing.T) {
+    WriteInitTOML()
+}
