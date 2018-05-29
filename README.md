@@ -20,6 +20,12 @@ Inspired by docker-compose.
 - [TODO] Create multi-services in just one `*.toml` file.
 - [TODO] `pwd` support while mounting vols.
 
+## How to install
+
+- Download package from [Releases gawainx/gxd\-cli](https://github.com/gawainx/gxd-cli/releases)
+- `mv gxd-cli-{system}-{version} gxd-cli` and `sudo cp gxd-cli /usr/local/bin` or `sudo mv gxd-cli-{system}-{version} /usr/local/bin/gxd-cli`
+- Enjoy it.
+
 ## How to use
 
 - Install gxd-cli
@@ -37,3 +43,13 @@ cd gxd-cli
 mage build # build for both linux and macOS
 mage darwin # build for macOS only
 ```
+
+## More
+
+If you meet any issues welcome to contact me.
+
+## Thanks
+
+- [urfave/cli: A simple, fast, and fun package for building command line apps in Go](https://github.com/urfave/cli)
+- [magefile/mage: a Make/rake\-like build tool using Go](https://github.com/magefile/mage)
+- [moby/moby: Moby Project \- a collaborative project for the container ecosystem to assemble container\-based systems](https://github.com/moby/moby)
