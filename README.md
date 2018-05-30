@@ -31,7 +31,7 @@ Inspired by docker-compose.
 - Install gxd-cli
 - change dir to your work dir.
 - type `gxd-cli init` to create example toml. Or you can create your own toml file.
-- `gxd-cli -f {service.toml}` to make it work.
+- `gxd-cli up {service.toml}` to make it work.
 
 ## How to build
 
