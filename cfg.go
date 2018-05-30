@@ -25,9 +25,9 @@ func (pi PortInt) String() string{
 }
 
 type TOMLConfig struct {
-    Title string
-    Net   NetworkConfig    `toml:"network"`
-    Service ContainerConfig
+    Title           string
+    Net             NetworkConfig    `toml:"network"`
+    Service         ContainerConfig
 }
 
 // To create network

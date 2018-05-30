@@ -68,3 +68,6 @@ func Clean(){
     os.RemoveAll(path)
 }
 
+func InstallDep(){
+
+}
