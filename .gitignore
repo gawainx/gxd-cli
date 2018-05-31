@@ -7,6 +7,8 @@
 .idea/
 .DB_Store
 tmp/
+bin/
+gxd-cli-*
 test-*
 *_test.go
 

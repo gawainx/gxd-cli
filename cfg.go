@@ -128,7 +128,7 @@ func(v *Vol) String()string{
 
 type Vols []Vol
 func (vs *Vols) ReplacePWD(){
-    curDir, _ := filepath.Abs(os.Args[0])
+    curDir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
     //fmt.Println(curDir)
     for i, v := range *vs{
         if strings.ToLower(v.Host[:3]) == "pwd"{
@@ -137,7 +137,7 @@ func (vs *Vols) ReplacePWD(){
             //fmt.Println(v)
         }
     }
-    fmt.Println(vs)
+    //fmt.Println(vs)
 }
 
 // Init toml from *.toml

@@ -16,11 +16,11 @@ title = "TOML test"
   target = 8080
 
  [[services.volumes]]
-  host = "/Users/gawainx/go/src/gxd-cli"
+  host = "pwd"
   target = "/code"
 
  [[services.volumes]]
-  host = "/Users/gawainx/go/src/gxd-cli"
+  host = "pwd/tmp"
   target = "/cg"
  [[services]]
  name = "tb"

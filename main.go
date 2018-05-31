@@ -34,11 +34,20 @@ func main(){
                 return nil
             },
         },
+        {
+            Name:"m",
+            Action: func(c *cli.Context) error{
+                var tom = new(MultiTOMLConfig)
+                tom.InitFromFile(c.Args().First())
+                tom.RunContainers()
+                return nil
+            },
+        },
     }
 
     err := app.Run(os.Args)
     if err != nil {
-        log.Fatal(err)
+        log.Panic(err)
     }
 }
 
