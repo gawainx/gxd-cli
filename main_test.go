@@ -11,7 +11,7 @@ import "testing"
 
 func TestRunContainer(t *testing.T) {
     var tom = new(TOMLConfig)
-    tom.InitFromFile("tmp.toml")
+    tom.InitFromFile("service.toml")
     RunContainer(tom)
 }
 
