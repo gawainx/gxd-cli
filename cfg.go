@@ -52,6 +52,7 @@ type ContainerConfig struct {
     Net             string
     Ports 			[]Port
     Volumes			Vols
+    AutoRemove      bool   `toml:"auto_remove"`
 }
 
 func (c *ContainerConfig) RunContainer(){
@@ -89,6 +90,7 @@ func (c *ContainerConfig) RunContainer(){
         Binds:vols,
         PortBindings:pts,
         NetworkMode:container.NetworkMode(c.Net),
+        AutoRemove:c.AutoRemove,
     },nil,c.Name)
     if err != nil{
         panic(err)

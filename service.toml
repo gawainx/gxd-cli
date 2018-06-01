@@ -8,6 +8,7 @@ title = "TOML test"
  work_dir = "/code"
  net = "iot" # container network
  cmd = "echo hello"
+ auto_remove = true
  [[services.ports]]
   host = 8974
   target = 80

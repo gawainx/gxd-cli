@@ -16,23 +16,31 @@ import (
 var toml_tmpl = `## toml file below equals to the command 
 ## "docker run -d -v /go/src/gxd-cli:/code -w /code --net iot -p 8974:80 -p 8996:8080 alpine ./gin-server"
 title = "TOML test"
-[service]
+[[services]]
  detach = false
- name = "test" # container name
+ name = "tg" # container name
  image = "alpine" 
  work_dir = "/code"
  net = "iot" # container network
- cmd = "./gin-server"
- [[service.ports]]
+ cmd = "echo hello"
+ [[services.ports]]
   host = 8974
   target = 80
- [[service.ports]]
+ [[services.ports]]
   host = 8996
   target = 8080
 
- [[service.volumes]]
-  host = "/go/src/gxd-cli/"
+ [[services.volumes]]
+  host = "pwd"
   target = "/code"
+
+ [[services.volumes]]
+  host = "pwd/tmp"
+  target = "/cg"
+ [[services]]
+ name = "tb"
+ image = "alpine"
+ cmd = "echo hello world."
 `
 
 func checkFileIsExist(filename string) bool {
@@ -45,9 +53,9 @@ func checkFileIsExist(filename string) bool {
 
 
 func WriteInitTOML() error{
-    var filename = `service.toml`
+    var filename = `services.toml`
     if checkFileIsExist(filename){
-        fmt.Println("File service.toml exists.")
+        fmt.Println("File services.toml exists.")
         return nil
     }else{
         f,e := os.Create(filename)

@@ -11,14 +11,15 @@ Inspired by docker-compose.
 - Support multi volumes bingding. e.g.: `-v /use/bin:/code`
 - Modify your own container name.
 - Cross platform,work well in macOS and Linux.
+- Support PWD when mounting volumes. *2018-05-31 updated*
+- Create multi-services in just one `*.toml` file. *2018-05-31 updated*
 
 ## Not support and TODOs
 
 - No Windows `.exe` file. And may never support.
 - Not support interactive containers(e.g.:`bash` in your container)
 - [TODO] `detach` option not take effect.
-- [TODO] Create multi-services in just one `*.toml` file.
-- [TODO] `pwd` support while mounting vols.
+- [TODO] Set Launch order when create more than one containers.
 
 ## How to install
 
@@ -35,11 +36,14 @@ Inspired by docker-compose.
 
 ## How to build
 
-To build from source you need to install golang and [Mage :: Mage](https://magefile.org/)
+To build from source you need to install golang, [Mage :: Mage](https://magefile.org/) and [Masterminds/glide: Package Management for Golang](https://github.com/Masterminds/glide).
+
+**Attention: glide.yaml is just used for help install dependencies. DO NOT run `glide up` in the project dir or you may meet strange problem.**
 
 ```shell
 git clone git@github.com:gawainx/gxd-cli.git
 cd gxd-cli
+glide up #download dependencies.
 mage build # build for both linux and macOS
 mage darwin # build for macOS only
 ```
