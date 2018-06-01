@@ -8,6 +8,7 @@
 .DB_Store
 tmp/
 bin/
+vendor/
 gxd-cli-*
 test-*
 *_test.go

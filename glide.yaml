@@ -1,0 +1,17 @@
+package: gxd-cli
+import:
+- package: github.com/BurntSushi/toml
+- package: github.com/docker/docker
+  subpackages:
+  - api/types
+  - api/types/container
+  - client
+- package: github.com/docker/go-connections
+  subpackages:
+  - nat
+- package: github.com/gin-gonic/gin
+- package: github.com/magefile/mage
+  subpackages:
+  - mg
+  - sh
+- package: github.com/urfave/cli
