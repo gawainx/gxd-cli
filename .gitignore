@@ -9,6 +9,9 @@
 tmp/
 test-*
 *_test.go
+vendor/
+gxd-cli-*
+bin/
 
 # Test binary, build with `go test -c`
 *.test
