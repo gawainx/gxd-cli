@@ -12,14 +12,14 @@ import (
 	"log"
 	"fmt"
     "encoding/json"
-    "github.com/docker/docker/client"
-    "context"
     "github.com/docker/go-connections/nat"
     "github.com/docker/docker/api/types/container"
     "github.com/docker/docker/api/types"
     "strings"
     "path/filepath"
     "os"
+    "github.com/docker/docker/client"
+    "context"
 )
 
 type PortInt int
@@ -55,12 +55,7 @@ type ContainerConfig struct {
     AutoRemove      bool   `toml:"auto_remove"`
 }
 
-func (c *ContainerConfig) RunContainer(){
-    ctx := context.Background()
-    cli, err := client.NewClientWithOpts(client.WithVersion("1.37"))
-    if err != nil {
-        panic(err)
-    }
+func (c *ContainerConfig) RunContainer(cli *client.Client, ctx context.Context){
     c.Volumes.ReplacePWD() //replace pwd to current abs dir
     //set mount volumes
     vols := make([]string,len(c.Volumes))
@@ -131,7 +126,6 @@ func(v *Vol) String()string{
 type Vols []Vol
 func (vs *Vols) ReplacePWD(){
     curDir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
-    //fmt.Println(curDir)
     for i, v := range *vs{
         if strings.ToLower(v.Host[:3]) == "pwd"{
             //fmt.Println(v.Host[:3])
@@ -139,7 +133,6 @@ func (vs *Vols) ReplacePWD(){
             //fmt.Println(v)
         }
     }
-    //fmt.Println(vs)
 }
 
 // Init toml from *.toml
@@ -150,6 +143,6 @@ func (t *TOMLConfig) InitFromFile(filename string){
     }
 }
 
-func RunContainer(t *TOMLConfig){
-    t.Service.RunContainer()
-}
+//func RunContainer(t *TOMLConfig){
+//    t.Service.RunContainer()
+//}

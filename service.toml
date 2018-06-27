@@ -1,6 +1,8 @@
 ## toml file below equals to the command 
 ## "docker run -d -v /go/src/gxd-cli:/code -w /code --net iot -p 8974:80 -p 8996:8080 alpine ./gin-server"
 title = "TOML test"
+[network]
+ name = "tmp"
 [[services]]
  detach = false
  name = "tg" # container name
