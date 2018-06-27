@@ -12,11 +12,14 @@ import (
 	"log"
 	"fmt"
     "encoding/json"
-    "github.com/docker/docker/client"
-    "context"
     "github.com/docker/go-connections/nat"
     "github.com/docker/docker/api/types/container"
     "github.com/docker/docker/api/types"
+    "strings"
+    "path/filepath"
+    "os"
+    "github.com/docker/docker/client"
+    "context"
 )
 
 type PortInt int
@@ -40,6 +43,7 @@ func (n *NetworkConfig) String() string{
 
 // Config container
 type ContainerConfig struct {
+    Priority        uint //launch order
     Name 			string
     Image			string
     Detached 		bool
@@ -47,7 +51,51 @@ type ContainerConfig struct {
     CMD             string `toml:"cmd"`
     Net             string
     Ports 			[]Port
-    Volumes			[]Vol
+    Volumes			Vols
+    AutoRemove      bool   `toml:"auto_remove"`
+}
+
+func (c *ContainerConfig) RunContainer(cli *client.Client, ctx context.Context){
+    c.Volumes.ReplacePWD() //replace pwd to current abs dir
+    //set mount volumes
+    vols := make([]string,len(c.Volumes))
+    for index,item := range c.Volumes{
+        vols[index] = item.String()
+    }
+
+    //set exposed ports for containers and publish ports
+    exports := make(nat.PortSet)
+    pts := make(nat.PortMap)
+    for _,p := range c.Ports{
+        tmpPort, _ := nat.NewPort("tcp",p.Target.String())
+        pb := make([]nat.PortBinding,0)
+        pb = append(pb,nat.PortBinding{
+            HostPort:p.Host.String(),
+        })
+        exports[tmpPort] = struct{}{}
+        pts[tmpPort] = pb
+    }
+
+    resp, err := cli.ContainerCreate(ctx, &container.Config{
+        Image:c.Image,
+        ExposedPorts:exports,
+        Cmd:strings.Split(c.CMD," "),
+        WorkingDir:c.WorkDir,
+    },&container.HostConfig{
+        Binds:vols,
+        PortBindings:pts,
+        NetworkMode:container.NetworkMode(c.Net),
+        AutoRemove:c.AutoRemove,
+    },nil,c.Name)
+    if err != nil{
+        panic(err)
+    }
+
+    if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
+        panic(err)
+    }else{
+        log.Printf("Container %s is created and started.\n",resp.ID)
+    }
 }
 
 func (c *ContainerConfig) JSONStr() string{
@@ -75,6 +123,17 @@ func(v *Vol) String()string{
 	return fmt.Sprintf("%s:%s",v.Host,v.Target)
 }
 
+type Vols []Vol
+func (vs *Vols) ReplacePWD(){
+    curDir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+    for i, v := range *vs{
+        if strings.ToLower(v.Host[:3]) == "pwd"{
+            //fmt.Println(v.Host[:3])
+            (*vs)[i].Host = strings.Replace(v.Host,v.Host[:3],curDir,-1)
+            //fmt.Println(v)
+        }
+    }
+}
 
 // Init toml from *.toml
 func (t *TOMLConfig) InitFromFile(filename string){
@@ -84,49 +143,6 @@ func (t *TOMLConfig) InitFromFile(filename string){
     }
 }
 
-func RunContainer(t *TOMLConfig){
-    ctx := context.Background()
-    cli, err := client.NewClientWithOpts(client.WithVersion("1.37"))
-    if err != nil {
-        panic(err)
-    }
-
-    //set mount volumes
-    vols := make([]string,len(t.Service.Volumes))
-    for index,item := range t.Service.Volumes{
-        vols[index] = item.String()
-    }
-
-    //set exposed ports for containers and publish ports
-    exports := make(nat.PortSet)
-    pts := make(nat.PortMap)
-    for _,p := range t.Service.Ports{
-        tmpPort, _ := nat.NewPort("tcp",p.Target.String())
-        pb := make([]nat.PortBinding,0)
-        pb = append(pb,nat.PortBinding{
-            HostPort:p.Host.String(),
-        })
-        exports[tmpPort] = struct{}{}
-        pts[tmpPort] = pb
-    }
-
-    resp, err := cli.ContainerCreate(ctx, &container.Config{
-        Image:t.Service.Image,
-        ExposedPorts:exports,
-        Cmd:[]string{t.Service.CMD},
-        WorkingDir:t.Service.WorkDir,
-    },&container.HostConfig{
-        Binds:vols,
-        PortBindings:pts,
-        NetworkMode:container.NetworkMode(t.Service.Net),
-    },nil,t.Service.Name)
-    if err != nil{
-        panic(err)
-    }
-
-    if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
-        panic(err)
-    }else{
-        log.Printf("Container %s is created and started.\n",resp.ID)
-    }
-}
+//func RunContainer(t *TOMLConfig){
+//    t.Service.RunContainer()
+//}

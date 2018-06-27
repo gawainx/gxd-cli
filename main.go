@@ -15,6 +15,10 @@ import (
 
 func main(){
     app := cli.NewApp()
+    app.Version = "1.0-rc"
+    app.Author = "Gawain Antarx"
+    app.Email = "liangyixp@live.cn"
+    app.Description = `gxd-cli is GawainX' Docker CLIent.`
     app.Commands = []cli.Command{
         {
             Name:  "init",
@@ -26,11 +30,14 @@ func main(){
         },
         {
             Name:  "up",
-            Usage: "gxd-cli up <toml file>:Run container from *.toml",
+            Usage: "gxd-cli up <toml file>:Run containers from *.toml",
             Action: func(c *cli.Context) error{
-                var tom = new(TOMLConfig)
+                var tom = new(MultiTOMLConfig)
                 tom.InitFromFile(c.Args().First())
-                RunContainer(tom)
+                if tom.Net.Name != ""{
+                    tom.CreateNet()
+                }
+                tom.RunContainers()
                 return nil
             },
         },
@@ -38,7 +45,7 @@ func main(){
 
     err := app.Run(os.Args)
     if err != nil {
-        log.Fatal(err)
+        log.Panic(err)
     }
 }
 

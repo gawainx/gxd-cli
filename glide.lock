@@ -1,0 +1,98 @@
+hash: 0b2aa25241400ca884e505cefeb92ad7348203ab2a99a76e8312686aa74502e4
+updated: 2018-06-01T14:57:42.049538+08:00
+imports:
+- name: github.com/BurntSushi/toml
+  version: a368813c5e648fee92e5f6c30e3944ff9d5e8895
+- name: github.com/docker/distribution
+  version: f0cc927784781fa395c06317c58dea2841ece3a9
+  subpackages:
+  - digestset
+  - reference
+- name: github.com/docker/docker
+  version: 71cd53e4a197b303c6ba086bd584ffd67a884281
+  subpackages:
+  - api
+  - api/types
+  - api/types/blkiodev
+  - api/types/container
+  - api/types/events
+  - api/types/filters
+  - api/types/image
+  - api/types/mount
+  - api/types/network
+  - api/types/registry
+  - api/types/strslice
+  - api/types/swarm
+  - api/types/swarm/runtime
+  - api/types/time
+  - api/types/versions
+  - api/types/volume
+  - client
+- name: github.com/docker/go-connections
+  version: 7395e3f8aa162843a74ed6d48e79627d9792ac55
+  subpackages:
+  - nat
+  - sockets
+  - tlsconfig
+- name: github.com/docker/go-units
+  version: 47565b4f722fb6ceae66b95f853feed578a4a51c
+- name: github.com/gin-contrib/sse
+  version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
+- name: github.com/gin-gonic/gin
+  version: caf3e350a548af1add9def68087ac53d1d000caa
+  subpackages:
+  - binding
+  - json
+  - render
+- name: github.com/gogo/protobuf
+  version: 30cf7ac33676b5786e78c746683f0d4cd64fa75b
+  subpackages:
+  - proto
+- name: github.com/golang/protobuf
+  version: 3a3da3a4e26776cc22a79ef46d5d58477532dede
+  subpackages:
+  - proto
+- name: github.com/json-iterator/go
+  version: 8744d7c5c7b40a53e018f78d8c508b3315260b96
+- name: github.com/magefile/mage
+  version: 5e51f9ad1ed0886c5d06a8c46a09703cfc4d9034
+  subpackages:
+  - mg
+  - sh
+  - types
+- name: github.com/mattn/go-isatty
+  version: 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c
+- name: github.com/Microsoft/go-winio
+  version: ab35fc04b6365e8fcb18e6e9e41ea4a02b10b175
+- name: github.com/modern-go/concurrent
+  version: bacd9c7ef1dd9b15be4a9909b8ac7a4e313eec94
+- name: github.com/modern-go/reflect2
+  version: 58118c1ea9161250907268a484af4dd6ed314280
+- name: github.com/opencontainers/go-digest
+  version: c9281466c8b2f606084ac71339773efd177436e7
+- name: github.com/opencontainers/image-spec
+  version: e562b04403929d582d449ae5386ff79dd7961a11
+  subpackages:
+  - specs-go
+  - specs-go/v1
+- name: github.com/pkg/errors
+  version: 816c9085562cd7ee03e7f8188a1cfd942858cded
+- name: github.com/ugorji/go
+  version: f3cacc17c85ecb7f1b6a9e373ee85d1480919868
+  subpackages:
+  - codec
+- name: github.com/urfave/cli
+  version: 8e01ec4cd3e2d84ab2fe90d8210528ffbb06d8ff
+- name: golang.org/x/net/context/ctxhttp
+  version: 1e491301e022f8f977054da4c2d852decd59571f
+- name: golang.org/x/net/proxy
+  version: 1e491301e022f8f977054da4c2d852decd59571f
+- name: golang.org/x/sys/unix
+  version: c11f84a56e43e20a78cee75a7c034031ecf57d1f
+- name: golang.org/x/sys/windows
+  version: c11f84a56e43e20a78cee75a7c034031ecf57d1f
+- name: gopkg.in/go-playground/validator.v8
+  version: 5f1438d3fca68893a817e4a66806cea46a9e4ebf
+- name: gopkg.in/yaml.v2
+  version: 5420a8b6744d3b0345ab293f6fcba19c978f1183
+testImports: []
