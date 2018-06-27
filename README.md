@@ -50,6 +50,14 @@ mage build # build for both linux and macOS
 mage darwin # build for macOS only
 ```
 
+Or you can just
+```shell
+git clone git@github.com:gawainx/gxd-cli.git
+dep ensure -update
+go install
+```
+than type `gxd-cli` in your terminal.
+
 ## More
 
 If you meet any issues welcome to contact me.
