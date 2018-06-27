@@ -13,6 +13,8 @@ Inspired by docker-compose.
 - Cross platform,work well in macOS and Linux.
 - Support PWD when mounting volumes. *2018-05-31 updated*
 - Create multi-services in just one `*.toml` file. *2018-05-31 updated*
+- Create Network support. *2018-06-27 updated*
+- Use golang/dep to manage dependencies. *2018-06-27 updated*
 
 ## Not support and TODOs
 
