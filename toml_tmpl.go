@@ -13,6 +13,7 @@ import (
     "io"
 )
 
+//设定配置文件模板
 var toml_tmpl = `## toml file below equals to the command 
 ## "docker run -d -v /go/src/gxd-cli:/code -w /code --net iot -p 8974:80 -p 8996:8080 alpine ./gin-server"
 title = "TOML test"
@@ -51,7 +52,9 @@ func checkFileIsExist(filename string) bool {
     return exist
 }
 
-
+//WriteInitTOML: 写入初始化配置模板文件
+//返回值:创建过程中的错误信息
+//如果创建时没有错误(正常创建文件),则返回 nil
 func WriteInitTOML() error{
     var filename = `services.toml`
     if checkFileIsExist(filename){

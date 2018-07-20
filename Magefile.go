@@ -10,7 +10,7 @@ import (
     "github.com/magefile/mage/mg"
 )
 
-const VERSION = "v0.3-alpha"    //version
+const VERSION = "v1.0-stable"    //version
 const prefix = "gxd-cli" // app name
 const path = "bin"	      // target path
 var Default = Build
